@@ -14,7 +14,9 @@ import jose.rodriguez.everis.peru.app.models.document.Category;
 import jose.rodriguez.everis.peru.app.models.document.Opening;
 import jose.rodriguez.everis.peru.app.models.service.implement.OpeningServiceImplement;
 import reactor.core.publisher.Flux;
+import springfox.documentation.swagger2.annotations.EnableSwagger2WebFlux;
 
+@EnableSwagger2WebFlux
 @EnableEurekaClient
 @SpringBootApplication
 @EnableDiscoveryClient
