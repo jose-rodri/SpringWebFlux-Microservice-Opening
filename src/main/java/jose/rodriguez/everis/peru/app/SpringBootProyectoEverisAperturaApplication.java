@@ -40,11 +40,11 @@ public class SpringBootProyectoEverisAperturaApplication implements CommandLineR
     mongoTemplate.dropCollection("categories").subscribe();
     mongoTemplate.dropCollection("openings").subscribe();
       
-    Category student = new Category("student");
-    Category listeningFamily = new Category("listeningFamily");
-    Category listeningTeacher = new Category("listeningTeacher");
+    Category trimestral = new Category("Trimestral");
+    Category bimestral = new Category("Bimestral");
+    Category semestral = new Category("Semestral");
     
-    Flux.just(student,listeningFamily,listeningTeacher)
+    Flux.just(trimestral,bimestral,semestral)
     .flatMap(c -> service.saveCategory(c))
     .doOnNext(c ->{
       log.info("Cantidad de curso : " + c.getTypes());
@@ -52,11 +52,11 @@ public class SpringBootProyectoEverisAperturaApplication implements CommandLineR
     }).thenMany(
         // String name,  String lastName,  String gender,Date date,  String typeDocument,  int document
         Flux.just(
-            new Opening("Java Master",false,student),
-            new Opening("Sql",false,listeningFamily),
-            new Opening("Ruby",false,listeningTeacher),
-            new Opening("Phyton",false,student),
-            new Opening("Auditoría",false,listeningTeacher))
+            new Opening("Java Master",false,trimestral),
+            new Opening("Sql",false,bimestral),
+            new Opening("Ruby",false,semestral),
+            new Opening("Phyton",false,trimestral),
+            new Opening("Auditoría",false,semestral))
         .flatMap( op -> {
           return service.save(op);
         })).subscribe(op -> log.info("insert : " + op.getNameCourse()));
